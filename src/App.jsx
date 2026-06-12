@@ -14,6 +14,20 @@ function App() {
     setTransactions([...transactions, newTransaction]);
   };
 
+  const handleDeleteTransaction = async (id) => {
+    try {
+      const res = await fetch(`http://localhost:5000/api/transactions/${id}`, {
+        method : "DELETE",
+      });
+
+      if(res.ok) {
+        setTransactions(transactions.filter( t => t.id !== id));
+      }
+    } catch (error) {
+      console.error("Error deleting transaction: ", error);
+    }
+  };
+
   useEffect(() => {
     fetch("http://localhost:5000/api/transactions")
       .then((response) => response.json())
@@ -25,7 +39,7 @@ function App() {
     <div style={{ padding: "40px", fontFamily: "sans-serif" }}>
       <h1>My Expense Tracker</h1>
       
-      <TransactionList transactions={transactions} />
+      <TransactionList transactions={transactions} onDelete={handleDeleteTransaction} />
       
       <Form onAddTransaction={handleAddTransaction} />
     </div>
