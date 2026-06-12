@@ -1,8 +1,18 @@
 import { useState, useEffect } from "react";
 import TransactionList from "./components/TransactionList";
+import Form from "./components/Form";
 
 function App() {
   const [transactions, setTransactions] = useState([]);
+
+  const [amount, setAmount] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [type, setType] = useState("expense");
+
+  const handleAddTransaction = (newTransaction) => {
+    setTransactions([...transactions, newTransaction]);
+  };
 
   useEffect(() => {
     fetch("http://localhost:5000/api/transactions")
@@ -17,6 +27,7 @@ function App() {
       
       <TransactionList transactions={transactions} />
       
+      <Form onAddTransaction={handleAddTransaction} />
     </div>
   );
 }

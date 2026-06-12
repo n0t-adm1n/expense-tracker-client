@@ -1,0 +1,53 @@
+import React from 'react'
+import { useState } from 'react';
+
+function Form({onAddTransaction}) {
+
+	const [amount, setAmount] = useState("");
+	const [description, setDescription] = useState("");
+	const [category, setCategory] = useState("");
+	const [type, setType] = useState("expense");
+
+	const handleSubmit = async(e) => {
+		e.preventDefault();
+
+		const newTransaction = { amount: parseFloat(amount), description, category, type };
+
+		try {
+			const response = await fetch("http://localhost:5000/api/transactions", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(newTransaction),
+      });
+
+			if (response.ok) {
+        const savedTransaction = await response.json();
+				onAddTransaction(savedTransaction); 
+        
+        setAmount(""); 
+				setDescription(""); 
+				setCategory("");
+      }
+
+		} catch (err) {
+			console.error("Error occured: ", err);
+		}
+	};
+
+
+	return (
+		<form onSubmit={handleSubmit} style={{ marginBottom: "30px", padding: "20px", border: "1px solid #ccc" }}>
+      <h3>Add New Transaction</h3>
+      <input type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} required style={{ marginRight: "10px" }} />
+      <input type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required style={{ marginRight: "10px" }} />
+      <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} required style={{ marginRight: "10px" }} />
+      <select value={type} onChange={(e) => setType(e.target.value)} style={{ marginRight: "10px" }}>
+        <option value="expense">Expense</option>
+        <option value="income">Income</option>
+      </select>
+      <button type="submit">Add</button>
+    </form>
+	)
+}
+
+export default Form
