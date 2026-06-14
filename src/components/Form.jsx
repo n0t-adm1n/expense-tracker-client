@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 
-function Form({onAddTransaction, editingTransaction, onUpdateTransaction}) {
+function Form({onAddTransaction, editingTransaction, onUpdateTransaction, onCancelEdit}) {
 
 	const [amount, setAmount] = useState("");
 	const [description, setDescription] = useState("");
@@ -54,6 +54,15 @@ function Form({onAddTransaction, editingTransaction, onUpdateTransaction}) {
 	};
 
 
+	const handleCancel = () => {
+		setAmount("");
+		setDescription("");
+		setCategory("");
+		setType("expense");
+
+		onCancelEdit();
+	}
+
 	return (
 		<form onSubmit={handleSubmit} style={{ marginBottom: "30px", padding: "20px", border: "1px solid #ccc" }}>
 			<h3>{editingTransaction ? "Edit Transaction" : "Add New Transaction"}</h3>
@@ -65,6 +74,8 @@ function Form({onAddTransaction, editingTransaction, onUpdateTransaction}) {
 				<option value="income">Income</option>
 			</select>
 			<button type="submit">Add</button>
+
+			{editingTransaction && <button type="reset" onClick={handleCancel}>Cancel</button>}
     </form>
 	)
 }

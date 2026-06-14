@@ -13,7 +13,6 @@ function DashBoard({transactions}) {
 	
 	const balance = totalIncome - totalExpenses;
 	
-	console.log(totalExpenses)
 
   return (
         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "30px", padding: "20px", backgroundColor: "#f8f9fa", borderRadius: "8px", border: "1px solid #ccc" }}>

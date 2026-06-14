@@ -38,6 +38,10 @@ function App() {
     }
   };
 
+  const handleCancelEdit = () => {
+    setEditingTransaction(null);
+  }
+
   useEffect(() => {
     fetch("http://localhost:5000/api/transactions")
       .then((response) => response.json())
@@ -55,12 +59,14 @@ function App() {
         onAddTransaction={handleAddTransaction} 
         editingTransaction={editingTransaction}
         onUpdateTransaction= {handleUpdateTransaction}  
+        onCancelEdit = {handleCancelEdit}   
+
       />
       
       <TransactionList 
             transactions={transactions} 
             onDelete={handleDeleteTransaction} 
-            onEdit = {handleEditClick}      
+            onEdit = {handleEditClick}   
       />
     </div>
   );
