@@ -10,10 +10,10 @@ function Form({onAddTransaction, editingTransaction, onUpdateTransaction}) {
 
 	useEffect(() => {
 		if (editingTransaction) {
-		setAmount(editingTransaction.amount);
-		setDescription(editingTransaction.description);
-		setCategory(editingTransaction.category);
-		setType(editingTransaction.type);
+			setAmount(editingTransaction.amount);
+			setDescription(editingTransaction.description);
+			setCategory(editingTransaction.category);
+			setType(editingTransaction.type);
 		}
  	}, [editingTransaction]);
 
@@ -56,7 +56,7 @@ function Form({onAddTransaction, editingTransaction, onUpdateTransaction}) {
 
 	return (
 		<form onSubmit={handleSubmit} style={{ marginBottom: "30px", padding: "20px", border: "1px solid #ccc" }}>
-			<h3>Add New Transaction</h3>
+			<h3>{editingTransaction ? "Edit Transaction" : "Add New Transaction"}</h3>
 			<input type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} required style={{ marginRight: "10px" }} />
 			<input type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required style={{ marginRight: "10px" }} />
 			<input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} required style={{ marginRight: "10px" }} />
