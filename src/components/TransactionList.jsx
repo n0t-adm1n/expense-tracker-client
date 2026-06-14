@@ -1,6 +1,6 @@
 import React from 'react'
 
-function TransactionList({transactions, onDelete}) {
+function TransactionList({transactions, onDelete, onEdit}) {
   return (
     <div>
       <h2>Recent Transactions:</h2>
@@ -11,6 +11,9 @@ function TransactionList({transactions, onDelete}) {
             <span style={{ color: "gray", marginLeft: "10px" }}>
               ({transaction.type})
             </span>
+
+            <button onClick={() => {onEdit(transaction)}}  style={{backgroundColor : "blue", color: "white", border: "none", borderRadius: "5px", marginLeft: "10px", padding: "5px 8px"}}>Edit</button>
+
 
             <button onClick={() => onDelete(transaction.id)}  style={{backgroundColor : "red", color: "white", border: "none", borderRadius: "5px", marginLeft: "10px", padding: "5px 8px"}}>Delete</button>
           </li>
