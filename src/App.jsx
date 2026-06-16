@@ -60,8 +60,8 @@ function App() {
   })
 
   return (
-    <div style={{ padding: "40px", fontFamily: "sans-serif" }}>
-      <h1>My Expense Tracker</h1>
+    <div className='max-w-3xl mx-auto p-8 font-sans text-gray-800'>
+      <h1 className="text-3xl font-bold text-center mb-8 text-blue-600">My Expense Tracker</h1>
       
       <DashBoard transactions={transactions} />
 
