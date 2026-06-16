@@ -64,18 +64,25 @@ function Form({onAddTransaction, editingTransaction, onUpdateTransaction, onCanc
 	}
 
 	return (
-		<form onSubmit={handleSubmit} style={{ marginBottom: "30px", padding: "20px", border: "1px solid #ccc" }}>
-			<h3>{editingTransaction ? "Edit Transaction" : "Add New Transaction"}</h3>
-			<input type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} required style={{ marginRight: "10px" }} />
-			<input type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required style={{ marginRight: "10px" }} />
-			<input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} required style={{ marginRight: "10px" }} />
-			<select value={type} onChange={(e) => setType(e.target.value)} style={{ marginRight: "10px" }}>
-				<option value="expense">Expense</option>
-				<option value="income">Income</option>
-			</select>
-			<button type="submit">Add</button>
+		<form onSubmit={handleSubmit} className='bg-white p-6 rounded-xl shadow-md mb-8 '>
+			<h3 className='text-xl font-bold text-gray-800 mb-4 '>{editingTransaction ? "Edit Transaction" : "Add New Transaction"}</h3>
 
-			{editingTransaction && <button type="reset" className="bg-blue-500" onClick={handleCancel}>Cancel</button>}
+			<div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+				<input type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} required className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <input type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} required className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <select value={type} onChange={(e) => setType(e.target.value)} className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                    <option value="expense">Expense</option>
+                    <option value="income">Income</option>
+                </select>
+			</div>
+
+			<div className='flex gap-3'>
+				<button type="submit" className='bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition duration-200 '>
+					{editingTransaction ? "Update" : "Add"}
+				</button>
+				{editingTransaction && <button type="reset" onClick={handleCancel} className="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded-lg transition duration-200">Cancel</button>}
+			</div>
     </form>
 	)
 }

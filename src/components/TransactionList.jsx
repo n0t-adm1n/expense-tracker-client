@@ -2,20 +2,24 @@ import React from 'react'
 
 function TransactionList({transactions, onDelete, onEdit}) {
   return (
-    <div>
+    <div className="bg-white rounded-xl shadow-md overflow-hidden">
       <h2>Recent Transactions:</h2>
-      <ul>
+      <ul className="divide-y divide-gray-200">
         {transactions.map((transaction) => (
-          <li key={transaction.id} style={{ marginBottom: "10px" }}>
-            <strong>{transaction.description}</strong>: ${transaction.amount}
-            <span style={{ color: "gray", marginLeft: "10px" }}>
-              ({transaction.type})
-            </span>
+          <li key={transaction.id} className="p-4 hover:bg-gray-50 flex justify-between items-center transition duration-150">
 
-            <button onClick={() => {onEdit(transaction)}}  style={{backgroundColor : "blue", color: "white", border: "none", borderRadius: "5px", marginLeft: "10px", padding: "5px 8px"}}>Edit</button>
-
-
-            <button onClick={() => onDelete(transaction.id)}  style={{backgroundColor : "red", color: "white", border: "none", borderRadius: "5px", marginLeft: "10px", padding: "5px 8px"}}>Delete</button>
+            <div className='flex flex-col'>
+              <span className="font-semibold text-gray-800">{transaction.description}</span>
+              <span className="text-sm text-gray-500">{transaction.category}</span>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <span className={`font-bold ${transaction.type === 'income' ? 'text-green-500' : 'text-red-500'}`}>
+                  {transaction.type === 'income' ? '+' : '-'}${parseFloat(transaction.amount).toFixed(2)}
+              </span>
+              <button onClick={() => onEdit(transaction)} className="text-blue-500 hover:text-blue-700 font-medium text-sm">Edit</button>
+              <button onClick={() => onDelete(transaction.id)} className="text-red-500 hover:text-red-700   font-medium text-sm">Delete</button>
+              </div>
           </li>
         ))}
       </ul>
