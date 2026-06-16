@@ -75,7 +75,7 @@ function Form({onAddTransaction, editingTransaction, onUpdateTransaction, onCanc
 			</select>
 			<button type="submit">Add</button>
 
-			{editingTransaction && <button type="reset" onClick={handleCancel}>Cancel</button>}
+			{editingTransaction && <button type="reset" className="bg-blue-500" onClick={handleCancel}>Cancel</button>}
     </form>
 	)
 }
