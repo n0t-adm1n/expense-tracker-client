@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import TransactionList from "./components/TransactionList";
 import Form from "./components/Form";
 import DashBoard from "./components/DashBoard";
+import Upload from "./components/Upload";
 
 function App() {
   const [transactions, setTransactions] = useState([]);
@@ -44,6 +45,10 @@ function App() {
     setEditingTransaction(null);
   }
 
+  const handleBulkUpload = (uploadedTransactions) => {
+    setTransactions([...transactions, ...uploadedTransactions])
+  }
+
   useEffect(() => {
     fetch("http://localhost:5000/api/transactions")
       .then((response) => response.json())
@@ -80,6 +85,8 @@ function App() {
           <option value="expense">Expenses Only</option>
         </select>
       </div>
+
+      <Upload onBulkUpload={handleBulkUpload} />
       
       <TransactionList 
             transactions={filteredTransaction} 
