@@ -21,6 +21,7 @@ function Upload({ onBulkUpload }) {
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
         const formattedData = mapData(jsonData);
+ 
         sendToBackend(formattedData);
         
       } catch (err) {
@@ -33,21 +34,29 @@ function Upload({ onBulkUpload }) {
 
   // THE DATA MAPPER
   const mapData = (excelRows) => {
-    const mapped = excelRows.map((row) => {
-      let type = "expense";
-      let amount = 0;
 
-      if (row["Credit"] && parseFloat(row["Credit"]) > 0) {
+    const succesfullTransactions = excelRows.filter(row => row["Status "] === "SUCCESS");
+
+
+    const mapped = succesfullTransactions.map((row) => {
+      let type = "expense";
+      const rawType = row["Type"] || "";
+
+      if (rawType.toLowerCase().includes("received") || rawType.toLowerCase().includes("added")) {
         type = "income";
-        amount = parseFloat(row["Credit"]);
-      } else if (row["Debit"] && parseFloat(row["Debit"]) > 0) {
-        type = "expense";
-        amount = parseFloat(row["Debit"]);
       }
+
+    //   remove commas from the raw string
+      let rawAmount = row["Amount (₹)"] || 0;
+      if (typeof rawAmount === "string") {
+        rawAmount = rawAmount.replace(/,/g, ""); 
+      }
+
+      const amount = parseFloat(rawAmount)
 
       return {
         amount: amount,
-        description: row["Activity"] || row["Narration"] || row["Details"] || "Paytm Transaction",
+        description: row["Sender/Receiver Name"] || "Paytm Transaction",
         category: "Paytm Upload", 
         type: type,
       };
