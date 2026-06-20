@@ -3,6 +3,7 @@ import TransactionList from "./components/TransactionList";
 import Form from "./components/Form";
 import DashBoard from "./components/DashBoard";
 import Upload from "./components/Upload";
+import AiInsight from "./components/AiInsight";
 
 function App() {
   const [transactions, setTransactions] = useState([]);
@@ -85,6 +86,8 @@ function App() {
           <option value="expense">Expenses Only</option>
         </select>
       </div>
+
+      <AiInsight />
 
       <Upload onBulkUpload={handleBulkUpload} />
       
