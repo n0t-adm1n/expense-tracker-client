@@ -1,7 +1,7 @@
-import React from 'react'
-import { useState } from 'react'
+import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 
-function AiInsight() {
+function AiInsights() {
   const [insights, setInsights] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -40,15 +40,22 @@ function AiInsight() {
       {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
 
       {insights && (
-        <div className="bg-white p-4 rounded-lg shadow-inner border border-purple-50">
-          {/* whitespace-pre-line ensures the bullet points and line breaks from the AI render correctly */}
-          <p className="text-gray-700 whitespace-pre-line leading-relaxed">
+        <div className="bg-white p-5 rounded-lg shadow-inner border border-purple-50">
+          <ReactMarkdown 
+            components={{
+              // These custom components tell Tailwind exactly how to style the AI's markdown
+              p: ({node, ...props}) => <p className="mb-3 leading-relaxed" {...props} />,
+              ul: ({node, ...props}) => <ul className="list-disc pl-5 mb-3 space-y-2" {...props} />,
+              li: ({node, ...props}) => <li className="leading-relaxed" {...props} />,
+              strong: ({node, ...props}) => <strong className="font-bold text-indigo-900" {...props} />
+            }}
+          >
             {insights}
-          </p>
+          </ReactMarkdown>
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default AiInsight
+export default AiInsights;
