@@ -1,16 +1,34 @@
-# React + Vite
+# Personal Expense Tracker Dashboard & AI Consultant (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive React application that helps users track personal finances, visualize income versus expenses, and receive personalized AI financial advice. 
 
-Currently, two official plugins are available:
+This repository contains the client-side code. The backend API repository can be found at [expense-tracker-api](https://github.com/n0t-adm1n/expense-tracker-api).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Features
+* **Interactive Dashboard:** Real-time calculation of total balance, income, and expenses.
+* **Bulk Data Ingestion:** Users can upload raw Excel (`.xlsx`) bank statements (specifically tailored for Paytm exports) to instantly populate the dashboard.
+* **AI Financial Consultant:** Integrates with Google's Gemini LLM to analyze spending habits and provide personalized, actionable financial advice.
+* **Modern UI/UX:** Fully styled with Tailwind CSS for a clean, responsive, and professional interface.
 
-## React Compiler
+## 🛠️ Tech Stack
+* **Framework:** React.js
+* **Styling:** Tailwind CSS
+* **Data Parsing:** SheetJS (`xlsx`) for reading Excel files
+* **Markdown Rendering:** `react-markdown` for styling AI responses
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 💻 Local Setup Instructions
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clone the repository:
+```bash
+   git clone https://github.com/n0t-adm1n/expense-tracker-client.git
+   ```
+2. Navigate into the directory and install dependencies:
+```bash
+   cd expense-tracker-api
+   npm install
+   ```
+3. Start the development server:
+```bash
+   npm run dev
+   ```
+*(Note: Ensure the backend API is running concurrently on port 5000 for full functionality).*
